@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>會員中心 | 原の香</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #b614f7, #f2c54a);
+      color: #333;
+    }
+    header {
+      background-color: #ffee80;
+      padding: 16px 24px;
+      font-size: 22px;
+      font-weight: bold;
+    }
+    .container {
+      display: flex;
+      max-width: 1080px;
+      margin: 20px auto;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      min-height: 600px;
+      overflow: hidden;
+    }
+    nav.sidebar {
+      width: 220px;
+      background: #d8bcda;
+      border-right: 1px solid #eee;
+      padding-top: 24px;
+    }
+    nav.sidebar ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    nav.sidebar ul li {
+      margin: 0;
+    }
+    nav.sidebar ul li a {
+      display: block;
+      padding: 14px 32px;
+      text-decoration: none;
+      color: #101010;
+      font-weight: 600;
+      border-left: 4px solid transparent;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+      cursor: pointer;
+    }
+    nav.sidebar ul li a:hover,
+    nav.sidebar ul li a.active {
+      background-color: #d198eb;
+      border-left-color: #930af4;
+    }
+    main.content {
+      flex-grow: 1;
+      padding: 40px;
+    }
+    main.content h2 {
+      margin-top: 0;
+      color: #bd0af4e0;
+    }
+    .section {
+      display: none;
+    }
+    .section.active {
+      display: block;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+    .btn {
+      background: linear-gradient(135deg, #f3e526, #d337e8);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 15px;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background: #ac07c2;
+    }
+    .placeholder-box {
+      padding: 20px;
+      background: #f8f8f8;
+      border: 1px dashed #ccc;
+      border-radius: 6px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <header>會員中心</header>
+  <div class="container">
+    <nav class="sidebar">
+      <ul>
+        <li><a class="active" onclick="switchSection('profile')">會員資料</a></li>
+        <li><a onclick="switchSection('orders')">訂單查詢</a></li>
+        <li><a onclick="switchSection('favorites')">收藏清單</a></li>
+        <li><a onclick="switchSection('settings')">帳號設定</a></li>
+      </ul>
+    </nav>
+    <main class="content">
+      <!-- 會員資料 -->
+      <div id="profile" class="section active">
+        <h2>會員資料</h2>
+        <div class="form-group">
+          <label>使用者名稱</label>
+          <input type="text" value="Handsomeman7" />
+        </div>
+        <div class="form-group">
+          <label>電子郵件</label>
+          <input type="email" value="handsome7@gmail.com" />
+        </div>
+        <div class="form-group">
+          <label>手機號碼</label>
+          <input type="tel" value="0987-654-321" />
+        </div>
+        <div class="form-group">
+          <label>地址</label>
+          <input type="text" value="台北市中正區重慶南路一段122號" />
+        </div>
+        <button class="btn">儲存變更</button>
+      </div>
+
+      <!-- 訂單查詢 -->
+      <div id="orders" class="section">
+        <h2>訂單查詢</h2>
+        <div class="placeholder-box">
+          這裡會顯示您的訂單列表
+        </div>
+      </div>
+
+      <!-- 收藏清單 -->
+      <div id="favorites" class="section">
+        <h2>收藏清單</h2>
+        <div class="placeholder-box">
+          這裡會顯示您收藏的商品
+        </div>
+      </div>
+
+      <!-- 帳號設定 -->
+      <div id="settings" class="section">
+        <h2>帳號設定</h2>
+        <div class="form-group">
+          <label>修改密碼</label>
+          <input type="password" placeholder="請輸入新密碼" />
+        </div>
+        <div class="form-group">
+          <label>再次輸入密碼</label>
+          <input type="password" placeholder="請再次輸入新密碼" />
+        </div>
+        <button class="btn">變更密碼</button>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    function switchSection(sectionId) {
+      const sections = document.querySelectorAll('.section');
+      sections.forEach(s => s.classList.remove('active'));
+
+      const target = document.getElementById(sectionId);
+      if (target) target.classList.add('active');
+
+      const links = document.querySelectorAll('nav.sidebar a');
+      links.forEach(link => link.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+  </script>
+</body>
+</html>

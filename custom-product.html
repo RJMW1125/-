@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>客製商品申請 | 原の香</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      height: 100vh;
+      background: linear-gradient(to right, #b614f7, #f2c54a);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+    }
+    .container {
+      background: rgba(0, 0, 0, 0.35);
+      padding: 30px 40px;
+      border-radius: 12px;
+      width: 360px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      text-align: center;
+    }
+    h2 {
+      margin-bottom: 24px;
+    }
+    label {
+      display: block;
+      margin-top: 12px;
+      margin-bottom: 6px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    select, input[type="text"], input[type="number"] {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 6px;
+      border: none;
+      font-size: 14px;
+      outline: none;
+    }
+    select {
+      appearance: none;
+      background: #fff;
+      color: #333;
+      font-weight: 600;
+    }
+    input[type="text"], input[type="number"] {
+      background: #eee;
+      color: #333;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+      background: #7b52ab;
+      color: white;
+      cursor: pointer;
+      font-weight: 700;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background: #5a3678;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>客製商品申請</h2>
+    <form id="customForm">
+      <label for="star">選擇物品</label>
+      <select id="star" name="star" required>
+        <option value="" disabled selected>請選擇物品</option>
+        <option value="上衣">上衣</option>
+        <option value="長褲">長褲</option>
+        <option value="短褲">短褲</option>
+        <option value="外套">外套</option>
+        <option value="內衣褲">內衣褲</option>
+        <option value="鞋子">鞋子</option>
+        <option value="其他">其他</option>
+      </select>
+
+      <label for="items">輸入對象名稱</label>
+      <input
+        type="text"
+        id="items"
+        name="items"
+        placeholder="輸入對象名稱"
+        pattern="^([^,]+)(,\s*[^,]+)?$"
+        title="請輸入一或兩項，用逗號分隔"
+        required
+      />
+
+      <label for="budget">預算 (NT$)</label>
+      <input
+        type="number"
+        id="budget"
+        name="budget"
+        min="1"
+        placeholder="請輸入您的預算"
+        required
+      />
+
+      <button type="submit">送出申請</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('customForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const star = document.getElementById('star').value.trim();
+      const items = document.getElementById('items').value.trim();
+      const budget = document.getElementById('budget').value.trim();
+
+      // 驗證物品輸入（最多兩項，用逗號隔開）
+      const itemsArr = items.split(',').map(i => i.trim()).filter(i => i.length > 0);
+      if (itemsArr.length === 0 || itemsArr.length > 2) {
+        alert('請輸入最多兩項物品，用逗號分隔');
+        return;
+      }
+
+      if (!star || !budget) {
+        alert('請完整填寫所有欄位');
+        return;
+      }
+
+      alert('以提出客製化商品服務申請，稍後將有官方帳號與您聯繫！');
+
+      // 可以這裡清空表單，或送出資料到後端 API
+      this.reset();
+    });
+  </script>
+</body>
+</html>
